@@ -1,0 +1,6 @@
+# Ignore npm directories
+**/node_modules/**
+dist
+
+**/node_modules/
+*/node_modules/
