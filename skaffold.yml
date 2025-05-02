@@ -8,6 +8,8 @@ deploy:
   kubectl: {}
 
 build:
+  tagPolicy:
+    sha256: {}
   local:
     push: false
   artifacts:
