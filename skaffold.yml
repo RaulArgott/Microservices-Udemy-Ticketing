@@ -21,4 +21,13 @@ build:
         manual:
           - dest: .
             src: src/**/*.ts
+
+    - image: raulargottc/client
+      context: ./client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: '**/*.js'
   
