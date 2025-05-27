@@ -9,3 +9,5 @@ dist
 */next
 
 **/.next/
+
+nats-test
