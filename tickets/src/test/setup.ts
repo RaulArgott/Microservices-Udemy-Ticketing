@@ -7,6 +7,8 @@ declare global {
     var signin: () => string[];
 }
 
+jest.mock('../nats-wrapper');
+
 let mongo: any;
 beforeAll(async () => {
     mongo = await MongoMemoryServer.create();
@@ -18,6 +20,7 @@ beforeAll(async () => {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 });
 beforeEach(async () => {
+    jest.clearAllMocks();
     if (mongoose.connection.db) {
         const collections = await mongoose.connection.db.collections();
 
@@ -45,18 +48,18 @@ afterAll(async () => {
  * @returns {string[]} An array with a single element, the cookie
  */
 global.signin = () => {
- const payload = {
-     id: new mongoose.Types.ObjectId().toHexString(),
-     email: 'hYq9C@example.com'
- };
+    const payload = {
+        id: new mongoose.Types.ObjectId().toHexString(),
+        email: 'hYq9C@example.com'
+    };
 
- const token = jwt.sign(payload, process.env.JWT_KEY!);
+    const token = jwt.sign(payload, process.env.JWT_KEY!);
 
- const session = { jwt: token };
+    const session = { jwt: token };
 
- const sessionJSON = JSON.stringify(session);
+    const sessionJSON = JSON.stringify(session);
 
- const base64 = Buffer.from(sessionJSON).toString('base64');
+    const base64 = Buffer.from(sessionJSON).toString('base64');
 
- return [`session=${base64}`];
+    return [`session=${base64}`];
 }
