@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
-import { NotFoundError, requireAuth } from '@ratickets1/common';
+import { NotFoundError, requireAuth, NotAuthorizedError } from '@ratickets1/common';
 import { Order } from '../models/order';
 
 const router = express.Router();
 
-router.get('/api/orders/:orderId', async (req: Request, res: Response) => {
+router.get('/api/orders/:orderId', requireAuth, async (req: Request, res: Response) => {
 
     const order = await Order.findById(req.params.orderId).populate('ticket');
 
@@ -13,7 +13,7 @@ router.get('/api/orders/:orderId', async (req: Request, res: Response) => {
     }
 
     if (order.userId !== req.currentUser!.id) {
-        throw new NotFoundError();
+        throw new NotAuthorizedError();
     }
 
     res.send(order);
