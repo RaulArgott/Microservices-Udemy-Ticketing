@@ -39,4 +39,13 @@ build:
         manual:
           - dest: .
             src: src/**/*.ts
+
+    - image: raulargottc/orders
+      context: ./orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: src/**/*.ts
   
