@@ -27,6 +27,7 @@ it("returns 401 if the user does not own the ticket", async () => {
     const ticket = Ticket.build({
         title: "concert",
         price: 20,
+        id: new mongoose.Types.ObjectId().toHexString(),
     });
     await ticket.save();
 
