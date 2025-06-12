@@ -48,4 +48,12 @@ build:
         manual:
           - dest: .
             src: src/**/*.ts
-  
+
+    - image: raulargottc/expiration
+      context: ./expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: src/**/*.ts
