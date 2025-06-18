@@ -57,3 +57,12 @@ build:
         manual:
           - dest: .
             src: src/**/*.ts
+
+    - image: raulargottc/payments
+      context: ./payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: src/**/*.ts
