@@ -4,10 +4,12 @@ import jwt from 'jsonwebtoken';
 
 
 declare global {
-    var signin: () => string[];
+    var signin: (userId?: string) => string[];
 }
 
 jest.mock('../nats-wrapper');
+
+jest.mock('../stripe');
 
 let mongo: any;
 beforeAll(async () => {
@@ -47,9 +49,9 @@ afterAll(async () => {
  * 
  * @returns {string[]} An array with a single element, the cookie
  */
-global.signin = () => {
+global.signin = (userId?: string) => {
     const payload = {
-        id: new mongoose.Types.ObjectId().toHexString(),
+        id: userId || new mongoose.Types.ObjectId().toHexString(),
         email: 'hYq9C@example.com'
     };
 
