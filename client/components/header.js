@@ -2,8 +2,8 @@ import Link from 'next/link';
 const Header = ({ currentUser }) => {
     const links = [
         !currentUser && { label: 'Sign Up', href: '/auth/signup' },
-        !currentUser && { label: 'Sign In', href: '/auth/signin' },
-        currentUser && { label: 'Sign Out', href: '/auth/signout' },
+        !currentUser && { label: 'Log In', href: '/auth/signin' },
+        currentUser && { label: 'Log Out', href: '/auth/signout' },
     ]
         .filter((linkConfig) => linkConfig)
         .map(({ label, href }) => {
@@ -16,7 +16,7 @@ const Header = ({ currentUser }) => {
             );
         })
     return (
-        <div className="navbar navbar-light bg-light">
+        <div className="navbar navbar-light bg-light mb-4 px-4">
             <Link href="/" className="navbar-brand">
                 Ticketing
             </Link>
