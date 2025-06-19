@@ -1,8 +1,10 @@
 import request from 'supertest';
 import { app } from '../../app';
 import mongoose from 'mongoose';
-import { Order } from '../../models/orders';
+import { Order } from '../../models/order';
 import { OrderStatus } from '@ratickets1/common';
+import { stripe } from '../../stripe';
+import { Payment } from '../../models/payment';
 
 it('returns a 404 when purchasing an order that does not exist', async () => {
     await request(app)
@@ -75,4 +77,15 @@ it('returns a 201 with valid inputs', async () => {
             orderId: order.id,
         })
         .expect(201);
+
+    const chargeOptions = (stripe.charges.create as jest.Mock).mock.calls[0][0];
+    expect(chargeOptions.source).toEqual('tok_visa');
+    expect(chargeOptions.amount).toEqual(20 * 100);
+    expect(chargeOptions.currency).toEqual('usd');
+
+    const payment = await Payment.findOne({
+        orderId: order.id,
+        stripeId: '123',
+    });
+    expect(payment).toBeDefined();
 });

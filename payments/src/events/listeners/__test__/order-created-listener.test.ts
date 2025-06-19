@@ -2,7 +2,7 @@ import { OrderCreatedEvent, OrderStatus } from "@ratickets1/common";
 import { natsWrapper } from "../../../nats-wrapper";
 import { OrderCreatedListener } from "../order-created-listener";
 import mongoose from "mongoose";
-import { Order } from "../../../models/orders";
+import { Order } from "../../../models/order";
 
 const setup = async () => {
     // create an instance of a listener

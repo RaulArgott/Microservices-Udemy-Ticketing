@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { natsWrapper } from "../../../nats-wrapper";
 import { OrderCreatedListener } from "../order-created-listener";
 import { OrderCancelledEvent, OrderStatus } from "@ratickets1/common";
-import { Order } from "../../../models/orders";
+import { Order } from "../../../models/order";
 import { OrderCancelledListener } from "../order-cancelled-listener";
 
 const setup = async () => {
