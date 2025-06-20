@@ -4,6 +4,7 @@ const Header = ({ currentUser }) => {
         !currentUser && { label: 'Sign Up', href: '/auth/signup' },
         !currentUser && { label: 'Log In', href: '/auth/signin' },
         currentUser && { label: 'Log Out', href: '/auth/signout' },
+        currentUser && { label: 'Sell Tickets', href: '/tickets/new' },
     ]
         .filter((linkConfig) => linkConfig)
         .map(({ label, href }) => {

@@ -9,7 +9,7 @@ import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 15 * 60;
+const EXPIRATION_WINDOW_SECONDS = 1 * 60;
 
 router.post('/api/orders',
     requireAuth,
@@ -19,7 +19,6 @@ router.post('/api/orders',
     validateRequest,
     async (req: Request, res: Response) => {
         // Find the ticket the user is trying to order in the database
-
         const { ticketId } = req.body;
         const ticket = await Ticket.findById(ticketId);
 

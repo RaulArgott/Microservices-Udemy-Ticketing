@@ -5,7 +5,7 @@ import { Ticket } from '../../models/ticket';
 import { TicketUpdatedPublisher } from '../publishers/ticket-updated-publisher';
 
 export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
-    async onMessage(data: { id: string; version: number; ticket: { id: string; }; }, msg: Message): Promise<void> {
+    async onMessage(data: OrderCancelledEvent['data'], msg: Message): Promise<void> {
         const ticket = await Ticket.findById(data.ticket.id);
 
         if (!ticket) {
